@@ -1,0 +1,1 @@
+#creates an add owner manage.py custom command
