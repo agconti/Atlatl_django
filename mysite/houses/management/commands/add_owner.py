@@ -1,6 +1,6 @@
 from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
-from houses.models import House, Owner
+from houses.models import Owner
 
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
