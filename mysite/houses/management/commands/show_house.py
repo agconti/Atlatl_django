@@ -19,11 +19,11 @@ class Command(BaseCommand):
             try:
                 h = House.objects.filter(owner=Owner.objects.filter(name=options['owner']))
                 for i,val in enumerate(h):
-                    self.stdout.write('Address=[%s] Owner=[%s]' % (h[i].address, h[i].owner.name))
+                    self.stdout.write('id=[%s] Address=[%s] Owner=[%s]' % (h[i].id, h[i].address, h[i].owner.name))
                 
             except Owner.DoesNotExist:
                 self.stdout.write('Specified Owner=[%s] does not exist in the dataset'  % options['owner'])
         else:
             h = House.objects.all()
             for i,val in enumerate(h):
-                self.stdout.write('Address=[%s] Owner=[%s]' % (h[i].address, h[i].owner.name))
+                self.stdout.write('id=[%s] Address=[%s] Owner=[%s]' % (h[i].id, h[i].address, h[i].owner.name))
