@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>
+		What houses are in the Neigborhood?
+	</title>
+    <h1>What houses are in the Neigborhood?</h1>
+</head>
+<body>
+	{% if house_list %}
+		{% for house in house_list %}
+		<p>Owner: {{house.owner.name}}</p>
+		    <ul>
+		        <li>House address: {{ house.address }}</li>
+		    </ul>
+        {% endfor %}
+	{% else %}
+		<p>No houses in the neighborhood.</p>
+	{% endif %}
+</body>
+</html>
