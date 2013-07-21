@@ -4,7 +4,9 @@ from django.db import models
 
 class Owner(models.Model):
     name = models.TextField(max_length=200, unique=True)
+    date_created = models.DateTimeField(auto_now_add=True, blank=True)
 
 class House(models.Model):
     address = models.TextField(max_length=200)
-    owner = models.OneToOneField(Owner)
+    date_created = models.DateTimeField(auto_now_add=True, blank=True)
+    owner = models.ManyToManyField(Owner)

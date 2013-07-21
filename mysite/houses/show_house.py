@@ -19,7 +19,7 @@ class Command(BaseCommand):
             try:
                 h = House.objects.filter(owner=Owner.objects.filter(name=options['owner']))
                 for i,val in enumerate(h):
-                    self.stdout.write('id=[%s] Address=[%s]' % (h[i].id, h[i].address), endswith='') 
+                    self.stdout.write('id=[%s] Address=[%s]' % (h[i].id, h[i].address, endswith='')) 
                     for num in range(0, len(h[i].owner)):
                         self.stdout.write('Owner=[%s]' % h[i].owner.name)
                 
@@ -28,6 +28,6 @@ class Command(BaseCommand):
         else:
             h = House.objects.all()
             for i,val in enumerate(h):
-                self.stdout.write('id=[%s] Address=[%s]' % (h[i].id, h[i].address), endswith='')
-                for num in range(0, len(h[i].owner)):
-                    self.stdout.write('Owner=[%s]' % h[i].owner.name)
+                self.stdout.write('id=[%s] Address=[%s]' % (h[i].id, h[i].address, endswith=''))
+                    for num in range(0, len(h[i].owner)):
+                        self.stdout.write('Owner=[%s]' % h[i].owner.name)
