@@ -28,7 +28,10 @@ class Command(BaseCommand):
                     i.delete()
                     self.stdout.write('House at [%s] was deleted' % i.address)
             except:
-                self.stdout.write('There is no house containing [%s] in the dataset'  % options['addr'])
+                self.stdout.write(
+                                  'There is no house containing [%s] in the dataset'  
+                                  % options['addr']
+                                  )
             
             #delete owner
             try:
