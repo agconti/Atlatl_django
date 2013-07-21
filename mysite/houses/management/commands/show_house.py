@@ -11,6 +11,14 @@ class Command(BaseCommand):
             dest='owner',
             default=False,
             help='Specify Owner to show'),
+        
+        make_option('--addr-contains',
+            action='store',
+            type = 'string',
+            dest='addr',
+            default=False,
+            help='Specify Owner to show')
+        
         )
         
     def handle(self, *args, **options):
@@ -19,7 +27,25 @@ class Command(BaseCommand):
         #get fields for house model
         fields = House.objects.model._meta.fields
                 
-        if options['owner']:
+        if options['addr'] and options['owner']:
+            
+            try:
+                house_querry = House.objects.filter(
+                                                    address__contains=options['addr'], 
+                                                    owner=Owner.objects.get(name=options['owner'])
+                                                    )
+                #print houses for owner to console
+                for i,val in enumerate(house_querry):
+                    for f in fields:
+                        self.stdout.write('%s=[%s],' % (f.attname,f.value_from_object(house_querry[i])), ending='')
+                    self.stdout.write('')
+            except:
+                self.stdout.write(
+                                  'There is no house containing [%s] in the dataset Or there is no Owner=[%s]'  
+                                  % (options['addr'], options['owner'])
+                                  )
+        
+        elif options['owner']:
             try:
                 #get houses for owner
                 house_querry = House.objects.filter(owner=Owner.objects.filter(name=options['owner']))
