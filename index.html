@@ -1,0 +1,15 @@
+<html>
+<head>
+	<title><h1>Whats in the Neigborhood?</h1></title>
+</head>
+<body>
+<table>
+    {% for field in fields %}
+        <tr>
+            <td>{{ field.name }}</td>
+            <td>{{ field.value }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

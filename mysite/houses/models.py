@@ -9,4 +9,4 @@ class Owner(models.Model):
 class House(models.Model):
     address = models.TextField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
-    owner = models.ManyToManyField(Owner)
+    owner = models.OneToOneField(Owner)

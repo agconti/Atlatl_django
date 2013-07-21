@@ -1,5 +1,6 @@
 from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
+from django.forms.models import model_to_dict
 from houses.models import House, Owner
 
 class Command(BaseCommand):
@@ -15,19 +16,25 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         '''
         '''
+        #get fields for house model
+        fields = House.objects.model._meta.fields
+                
         if options['owner']:
             try:
-                h = House.objects.filter(owner=Owner.objects.filter(name=options['owner']))
-                for i,val in enumerate(h):
-                    self.stdout.write('id=[%s] Address=[%s]' % (h[i].id, h[i].address), endswith='') 
-                    for num in range(0, len(h[i].owner)):
-                        self.stdout.write('Owner=[%s]' % h[i].owner.name)
-                
+                #get houses for owner
+                house_querry = House.objects.filter(owner=Owner.objects.filter(name=options['owner']))
+                #print houses for owner to console
+                for i,val in enumerate(house_querry):
+                    for f in fields:
+                        self.stdout.write('%s=[%s],' % (f.attname,f.value_from_object(house_querry[i])), ending='')
+                    self.stdout.write('')
             except Owner.DoesNotExist:
                 self.stdout.write('Specified Owner=[%s] does not exist in the dataset'  % options['owner'])
         else:
-            h = House.objects.all()
-            for i,val in enumerate(h):
-                self.stdout.write('id=[%s] Address=[%s]' % (h[i].id, h[i].address), endswith='')
-                for num in range(0, len(h[i].owner)):
-                    self.stdout.write('Owner=[%s]' % h[i].owner.name)
+            #get all houses
+            house_querry = House.objects.all()
+            #print all houses to console
+            for i,val in enumerate(house_querry):
+                for f in fields:
+                    self.stdout.write('%s=[%s],' % (f.attname,f.value_from_object(house_querry[i])), ending='')
+                self.stdout.write('')
