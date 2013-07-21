@@ -52,15 +52,25 @@ class Command(BaseCommand):
                 #print houses for owner to console
                 for i,val in enumerate(house_querry):
                     for f in fields:
-                        self.stdout.write('%s=[%s],' % (f.attname,f.value_from_object(house_querry[i])), ending='')
+                        self.stdout.write('%s=[%s],'
+                                          % (f.attname,f.value_from_object(house_querry[i])), 
+                                          ending=''
+                                          )
                     self.stdout.write('')
             except Owner.DoesNotExist:
-                self.stdout.write('Specified Owner=[%s] does not exist in the dataset'  % options['owner'])
+                self.stdout.write(
+                                  'Specified Owner=[%s] does not exist in the dataset'  
+                                  % options['owner']
+                                  )
         else:
             #get all houses
             house_querry = House.objects.all()
             #print all houses to console
             for i,val in enumerate(house_querry):
                 for f in fields:
-                    self.stdout.write('%s=[%s],' % (f.attname,f.value_from_object(house_querry[i])), ending='')
+                    self.stdout.write(
+                                      '%s=[%s],' 
+                                      % (f.attname,f.value_from_object(house_querry[i])), 
+                                      ending=''
+                                      )
                 self.stdout.write('')

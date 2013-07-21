@@ -37,10 +37,16 @@ class Command(BaseCommand):
                 o,create_house_owner = House.objects.get_or_create(address=options['address'], owner=(o))
                 
                 if create_owner == True:
-                    self.stdout.write('Successfully Added House: %s and Owner=%s'  % (options['address'], options['owner']))
+                    self.stdout.write(
+                                      'Successfully Added House: %s and Owner=%s'  
+                                      % (options['address'], options['owner'])
+                                      )
                 
                 elif create_house_owner == True: 
-                    self.stdout.write('Successfully Added House: %s to Owner=%s'  % (options['address'], options['owner']))
+                    self.stdout.write(
+                                      'Successfully Added House: %s to Owner=%s'  
+                                      % (options['address'], options['owner'])
+                                      )
                 else:
                     self.stdout.write('method failed to create an owner or a house')
                     
