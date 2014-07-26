@@ -29,9 +29,9 @@ class Command(BaseCommand):
                 o,create_owner = Owner.objects.get_or_create(name = options['owner'])
                 
                 # if an owner was created sync the database
-                if (create_owner == True):
-                    import subprocess
-                    subprocess.Popen(["python", "manage.py", "syncdb"])
+                #if (create_owner == True):
+                #    import subprocess
+                #    subprocess.Popen(["python", "manage.py", "syncdb"])
                 
                 # create / get the house 
                 o,create_house_owner = House.objects.get_or_create(address=options['address'], owner=(o))
